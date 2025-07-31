@@ -42,5 +42,7 @@ Before modeling, I visualized the data to understand patterns and biases.
 -  `callback_by_gender.png`
 -  `callback_by_race.png`
 -  `correlation_matrix.png`
+-  
+![Callback Rate by Gender](visualizations/callback_by_gender.png)
 
 These visuals were critical in validating the need for fairness-aware modeling.
