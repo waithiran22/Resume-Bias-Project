@@ -44,5 +44,32 @@ Before modeling, I visualized the data to understand patterns and biases.
 -  `correlation_matrix.png`
 -  
 ![Callback Rate by Gender](visualizations/callback_by_gender.png)
+![Callback Rate by Race](visualizations/callback_by_race.png)
+![Correlation Matrix](visualizations/correlation_matrix.png)
 
 These visuals were critical in validating the need for fairness-aware modeling.
+
+## Column Descriptions
+
+| Column Name              | Description                                                                 |
+|--------------------------|-----------------------------------------------------------------------------|
+| `received_callback`     | Target variable - 1 if applicant received a callback, 0 otherwise           |
+| `firstname`             | First name of applicant (proxy for race/gender, used for bias analysis)    |
+| `gender`                | Gender coded as binary (1 = Male, 0 = Female)                              |
+| `race`                  | Race coded from name (0 = White-sounding, 1 = Black-sounding)               |
+| `college_degree`        | Whether applicant holds a college degree (1 = Yes, 0 = No)                  |
+| `honors`                | Whether honors are listed on resume                                         |
+| `worked_during_school`  | Experience working during education                                         |
+| `volunteer`             | Volunteer experience indicated                                              |
+| `military`              | Military experience                                                         |
+| `employment_holes`      | Gaps in employment history                                                  |
+| `has_email_address`     | Presence of email address on resume                                         |
+| `job_req_any`           | Job required any skills                                                     |
+| `job_req_communication` | Communication skills required                                               |
+| `job_req_education`     | Education listed as a requirement                                           |
+| `job_req_computer`      | Computer skills required                                                    |
+| `job_req_organization`  | Organizational skills required                                              |
+| `job_req_school`        | Schooling mentioned in job requirements                                     |
+| `computer_skills`       | Resume lists computer-related skills                                        |
+| `special_skills`        | Resume lists special/technical skills                                       |
+
