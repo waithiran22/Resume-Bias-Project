@@ -46,7 +46,7 @@ Before modeling, I performed EDA to detect patterns, correlations, and possible 
 #### Callback Rate by Gender
 ![Callback Rate by Gender](callback%20rate%20gender.png)
 
-**Insight**: Male applicants had a higher callback rate — a clear signal of gender-related bias in hiring responses.
+**Insight**: Female applicants had a higher callback rate.
 
 ---
 
