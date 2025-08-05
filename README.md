@@ -14,7 +14,7 @@ The goal is to **detect potential biases in hiring** by analyzing resume content
 
 ---
 
-## 🗂 Dataset Overview
+## Dataset Overview
 
 The dataset is drawn from a real audit study of racial and gender discrimination in hiring. Each row represents a unique resume submitted to a job posting.
 
@@ -283,7 +283,7 @@ This visualization highlights the most predictive resume features when bias-pron
 - Presence of an `email address` and previous `volunteer` experience were also influential.
 - Interestingly, `military` and `worked_during_school` had less importance, showing potential employer bias in evaluating these traits.
 
-### 🧠 Why This Matters:
+### Why This Matters:
 Removing biased columns didn't just improve fairness, it revealed what employers *should* value:
 - Qualifications
 - Experience
