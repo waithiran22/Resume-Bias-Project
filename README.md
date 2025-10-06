@@ -56,11 +56,11 @@ Before modeling, I performed EDA to detect patterns, correlations, and possible 
 ---
 
 Visual examples:  
-![Callback Rate by Race](callback%20rate%20race.png)
+![Callback Rate by Race](images/callback%20rate%20race.png)
   
-![Callback Rate by Gender](callback%20rate%20gender.png)
+![Callback Rate by Gender](images/callback%20rate%20gender.png)
   
-![Confusion Matrix – Logistic Regression](confusion%20matrix-logical%20regression%20(baseline%20model).png)
+![Confusion Matrix – Random Forest](images/random%20forest%20confusion%20matrix.png)
 
 ---
 ## Statistical Testing (Chi-Square)
