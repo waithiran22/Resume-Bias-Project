@@ -14,10 +14,7 @@ The goal is to **detect potential biases in hiring** by analyzing resume content
 
 ---
 
-## Interactive Tableau Dashboard  
-
- **[View Interactive Dashboard on Tableau Public](https://public.tableau.com/app/profile/your-link)**  
-or  
+## Interactive Tableau Dashboard   
 [Download the Packaged Workbook (.twbx)](dashboard/Bias%20in%20resume%20callbacks.twbx)  
 
 The dashboard includes:  
@@ -26,7 +23,7 @@ The dashboard includes:
 - **What Employers Value** → Feature importance rankings once biased features are removed.  
 - **Resume Correlations** → Heatmap of education, honors, gaps, and skills.  
 
-![Dashboard Snapshot](dashboard/dashboardimage.png)  
+![Dashboard Snapshot](Dashboard%20Image.png)
 
 ---
 ## Dataset Overview
