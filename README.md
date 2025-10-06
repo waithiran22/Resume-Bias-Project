@@ -28,6 +28,7 @@ The dashboard includes:
 ![Dashboard Snapshot](Dashboard%20Image.png)
 
 ---
+
 ## Dataset Overview
 
 The dataset is drawn from a real audit study of racial and gender discrimination in hiring. Each row represents a unique resume submitted to a job posting.
@@ -37,9 +38,7 @@ The dataset is drawn from a real audit study of racial and gender discrimination
 - **Applicant features**: First names coded by race/gender  
 - **Job post info**: Requirements for education, skills, etc.  
 - **Target**: `received_callback` (1 = got a callback; 0 = no callback)
-
-> I removed irrelevant metadata (like job URLs) and cleaned yes/no columns into binary format. I also handled missing values and encoded categorical fields.
-
+  
 **Sensitive proxy variables** like `firstname` were included early in modeling but later removed to evaluate their outsized influence.
 
 ---
@@ -48,41 +47,39 @@ The dataset is drawn from a real audit study of racial and gender discrimination
 
 Before modeling, I performed EDA to detect patterns, correlations, and possible discrimination indicators.
 
-### Key Insights:
-- **Gender Bias**: Male-sounding names received more callbacks than female-sounding ones.
-- **Racial Bias**: White-sounding names were significantly more likely to receive callbacks than Black-sounding names.
-- **Correlated Features**: Degree completion, email presence, and honors slightly correlated with callback likelihood.
+---
+![Callback Rate by Race](https://github.com/waithiran22/Resume-Bias-Project/blob/main/Callback%20Rate%20by%20Race.png?raw=true)
+  
+![Callback Rate by Gender](https://github.com/waithiran22/Resume-Bias-Project/blob/main/Callback%20Rate%20by%20Gender.png?raw=true)
+  
+![Correlation Heatmap](https://github.com/waithiran22/Resume-Bias-Project/blob/main/Correlation%20Heatmap.png?raw=true)
 
 ---
 
-Visual examples:  
-![Callback Rate by Race](images/callback%20rate%20race.png)
-  
-![Callback Rate by Gender](images/callback%20rate%20gender.png)
-  
-![Confusion Matrix – Random Forest](images/random%20forest%20confusion%20matrix.png)
-
----
 ## Statistical Testing (Chi-Square)
 
 To check whether differences in callback rates were random or evidence of bias, I ran Chi-Square independence tests:
 
 -Gender vs Callback → significant (p < 0.05)
+
 -Race vs Callback → significant (p < 0.05)
 
-Result: Callbacks are significantly associated with both race and gender, meaning disparities are not due to chance but evidence of real bias
+*-Result: Callbacks are significantly associated with both race and gender, meaning disparities are not due to chance but evidence of real bias*
 
 ---
-## Baseline Model: Logistic Regression
-I built a Logistic Regression model to predict callbacks.
 
- -ROC AUC:0.62 (moderately better than chance)
+## Baseline Model: Logistic Regression
+-ROC AUC:0.62 (moderately better than chance)
+
 *-Issue: The model leaned heavily on firstname (a strong proxy for race/gender).*
 
--Insight: Even algorithms replicate bias — the model “learned” that names matter more than skills or education.
+![ROC Curve (Model Performance)](https://github.com/waithiran22/Resume-Bias-Project/blob/main/ROC%20Curve%20(Model%20Performance).png?raw=true)
+
+![Confusion Matrix](https://github.com/waithiran22/Resume-Bias-Project/blob/main/Confusion%20Matrix.png?raw=true)
 
 ---
-### Fair Model with SMOTE (No firstname)  
+
+### Fairness-Aware Modeling 
 - Dropped firstname.  
 - Balanced dataset with SMOTE.  
 - Improved fairness, reduced reliance on demographic proxies.  
@@ -91,15 +88,12 @@ I built a Logistic Regression model to predict callbacks.
 - AUC: ~0.70 with firstname, dropped when removed.  
 - Feature importances highlighted **college_degree**, **honors**, **special_skills**.  
 
-ROC Example:  
-![](random%20forest%20ROC%20curve.png)  
-
-Confusion Matrix Example:  
-![](confusion%20matrix%20(no%20firstname).png)  
+![Feature Correlation Heatmap](https://github.com/waithiran22/Resume-Bias-Project/blob/main/Feature%20Correlation%20Heatmap.png?raw=true)
+Insight: Removing biased features revealed what employers should value: education, skill sand experience
 
 ---
 
-## 🔑 Key Takeaways  
+## Key Takeaways  
 - **Names Matter** → `firstname` strongly drives predictions, confirming bias.  
 - **Bias is Measurable** → Statistical tests and ML confirm disparities.  
 - **Fairness Techniques Work** → Removing proxy features + SMOTE improves equity.  
@@ -115,32 +109,36 @@ I learned how to:
 - Balance **performance vs. fairness** tradeoffs.  
 - Tell a story with data rooted in lived experience.  
 
-
+---
 ### Data & Cleaning
 
-- **Missing Values:** Many binary columns had inconsistent `yes/no`, `1/0`, or blank values — required manual normalization.
-- **Duplicate columns:** Some fields were redundant or proxies for the same attribute.
-- **Sensitive Features:** `firstname`, `race`, and `gender` needed careful handling to avoid leakage and unfair conclusions.
+- Missing Values: Many binary columns had inconsistent formats (yes/no, 1/0, or blanks). These were normalized into consistent binary values.
 
-### Modeling Issues
+- Duplicate Columns: Some features were redundant or served as proxies for the same attribute, so I removed them to avoid double-counting.
 
-- **ROC AUC Score was low (~0.62)** — indicating models struggled to meaningfully distinguish callbacks.
-- **Imbalanced Data:** Callback rate was low, causing models to predict the majority class (no callback). This required SMOTE (Synthetic Minority Over-sampling Technique).
-- **Bias Dominance:** `firstname` had o
+- Sensitive Features: Variables like firstname, race, and gender needed careful handling. They were included initially for bias detection but later excluded to avoid unfair leakage into model predictions.
+
+### Modeling Challenges
+
+-Low ROC AUC (~0.62): Early models struggled to meaningfully distinguish callbacks from non-callbacks.
+
+-Imbalanced Data: Callback rates were very low, so the models tended to predict the majority class (no callback). To address this, I used SMOTE (Synthetic Minority Over-sampling Technique) to balance the dataset.
+
+-Bias Dominance: The firstname feature had overwhelming influence on predictions, confirming that name-based bias was being replicated by the models. This feature was dropped in fairness-aware versions.
+
+---
+
 ### Technical Hiccups
+
 
 - `ModuleNotFoundError: No module named 'imblearn'` when trying to apply SMOTE — fixed with:
   ```python
   !pip install imbalanced-learn
+  
 ---
+
 ### What I Learned
 
 - Practical ML workflows: preprocessing, modeling, tuning, and evaluation
 - How to audit models for bias using data science tools
 - The balance between raw performance and equitable outcomes
-- How to tell a story with data, especially one rooted in lived experience
-verwhelming influence on predictions — needed to be dropped to allow fairer signals to emerge.
-
-This project is proof that data science can be more than math. It can reflect the world we live in and help us reshape it.
-
-
