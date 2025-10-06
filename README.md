@@ -56,7 +56,7 @@ Before modeling, I performed EDA to detect patterns, correlations, and possible 
 ---
 
 Visual examples:  
-- Callback Rate by Race ![](callback%20rate%20race.png)
+![Callback Rate by Race](callback%20rate%20race.png)
   
 ![Callback Rate by Gender](callback%20rate%20gender.png)
   
