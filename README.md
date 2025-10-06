@@ -57,69 +57,63 @@ Before modeling, I performed EDA to detect patterns, correlations, and possible 
 
 ---
 
-### Visualizations
+Visual examples:  
+- Callback Rate by Race ![](callback%20rate%20race.png)  
+- Callback Rate by Gender ![](callback%20rate%20gender.png)  
+- Correlation Heatmap ![](correlation%20matrix.png)  
 
-#### Callback Rate by Gender
-![Callback Rate by Gender](callback%20rate%20gender.png)
+---
+## Statistical Testing (Chi-Square)
 
-**Insight**: Female applicants had a higher callback rate.
+To check whether differences in callback rates were random or evidence of bias, I ran Chi-Square independence tests:
+
+-Gender vs Callback → significant (p < 0.05)
+-Race vs Callback → significant (p < 0.05)
+
+Result: Callbacks are significantly associated with both race and gender, meaning disparities are not due to chance but evidence of real bias
+
+---
+## Baseline Model: Logistic Regression
+I built a Logistic Regression model to predict callbacks.
+
+ -ROC AUC:0.62 (moderately better than chance)
+*-Issue: The model leaned heavily on firstname (a strong proxy for race/gender).*
+
+-Insight: Even algorithms replicate bias — the model “learned” that names matter more than skills or education.
+
+---
+### Fair Model with SMOTE (No firstname)  
+- Dropped firstname.  
+- Balanced dataset with SMOTE.  
+- Improved fairness, reduced reliance on demographic proxies.  
+
+### Random Forest  
+- AUC: ~0.70 with firstname, dropped when removed.  
+- Feature importances highlighted **college_degree**, **honors**, **special_skills**.  
+
+ROC Example:  
+![](random%20forest%20ROC%20curve.png)  
+
+Confusion Matrix Example:  
+![](confusion%20matrix%20(no%20firstname).png)  
 
 ---
 
-#### Callback Rate by Race
-![Callback Rate by Race](callback%20rate%20race.png)
-
-**Insight**: Applicants with White-sounding names had a significantly higher callback rate, supporting past research on racial bias.
-
----
-
-#### Correlation Matrix
-![Correlation Matrix](correlation%20matrix.png)
-
-**Insight**:
-- Some expected predictors like `college_degree`, `honors`, and `has_email_address` show weak positive correlation.
-- Surprisingly, `firstname` correlates more strongly with callback — implying name-based bias.
+## 🔑 Key Takeaways  
+- **Names Matter** → `firstname` strongly drives predictions, confirming bias.  
+- **Bias is Measurable** → Statistical tests and ML confirm disparities.  
+- **Fairness Techniques Work** → Removing proxy features + SMOTE improves equity.  
+- **Ethics > Accuracy (Sometimes)** → A fairer model with slightly lower accuracy is better for real-world use.  
 
 ---
 
-#### Resume Distribution
-![Resume Distribution](resume%20distribution.png)
+## 🙋🏽‍♀️ Reflections  
+This project started as frustration — sending resumes and wondering if my name held me back — but became a journey into **fairness, ethics, and representation** in data science.  
 
-**Insight**: Visualizing the balance of race and gender shows slight imbalance in the dataset. This justifies later use of **SMOTE** for fairer model training.
-
----
-
-## Column Descriptions
-
-| **Column Name**          | **Description**                                                                |
-|--------------------------|--------------------------------------------------------------------------------|
-| `received_callback`      | **Target variable**: 1 = received a callback, 0 = no callback                  |
-| `firstname`              | Proxy for race and gender (used initially, then removed for fairness testing) |
-| `gender`                 | Inferred gender: 1 = Male, 0 = Female                                          |
-| `race`                   | Inferred race: 0 = White-sounding, 1 = Black-sounding                          |
-| `college_degree`         | Whether the applicant has a college degree                                     |
-| `honors`                 | Resume includes honors or awards                                               |
-| `worked_during_school`   | Worked while attending school                                                  |
-| `volunteer`              | Has volunteer experience                                                       |
-| `military`               | Has military experience                                                        |
-| `employment_holes`       | Gaps in employment history                                                     |
-| `has_email_address`      | Resume includes an email address                                               |
-| `job_req_any`            | Job required general experience or "any" skills                                |
-| `job_req_communication`  | Job required communication skills                                              |
-| `job_req_education`      | Job listed education as a requirement                                          |
-| `job_req_computer`       | Computer skills required by the job                                            |
-| `job_req_organization`   | Job required organizational skills                                             |
-| `job_req_school`         | Mentions of school in job requirements                                         |
-| `computer_skills`        | Resume lists computer-related experience                                       |
-| `special_skills`         | Resume lists special/technical skills                                          |
-
----
-## Chi-Square Tests for Independence
-
-To statistically assess whether **race** and **gender** significantly affect callback rates, I performed Chi-Square tests for independence.
-
-These tests help answer:  
-*Are the differences in callback rates between groups due to chance or actual bias?*
+I learned how to:  
+- Audit models for bias.  
+- Balance **performance vs. fairness** tradeoffs.  
+- Tell a story with data rooted in lived experience.  
 
 
 ### Gender vs. Callback Rate
