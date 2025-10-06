@@ -15,7 +15,11 @@ The goal is to **detect potential biases in hiring** by analyzing resume content
 ---
 
 ## Interactive Tableau Dashboard   
-[Download the Packaged Workbook (.twbx)](dashboard/Bias%20in%20resume%20callbacks.twbx)  
+##  Download the Tableau Workbook  
+
+You can download and open the interactive Tableau workbook here:  
+
+[Bias in Resume Callbacks (Tableau Workbook)](Bias%20in%20resume%20callbacks.twbx)
 
 The dashboard includes:  
 - **Bias in Callbacks** → Callback rates by race and gender.  
