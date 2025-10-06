@@ -14,6 +14,21 @@ The goal is to **detect potential biases in hiring** by analyzing resume content
 
 ---
 
+## Interactive Tableau Dashboard  
+
+ **[View Interactive Dashboard on Tableau Public](https://public.tableau.com/app/profile/your-link)**  
+or  
+[Download the Packaged Workbook (.twbx)](dashboard/Bias%20in%20resume%20callbacks.twbx)  
+
+The dashboard includes:  
+- **Bias in Callbacks** → Callback rates by race and gender.  
+- **Model Performance** → ROC curves + Confusion Matrices with toggle between Logistic Regression and Random Forest.  
+- **What Employers Value** → Feature importance rankings once biased features are removed.  
+- **Resume Correlations** → Heatmap of education, honors, gaps, and skills.  
+
+![Dashboard Snapshot](figures/dashboard.png)  
+
+---
 ## Dataset Overview
 
 The dataset is drawn from a real audit study of racial and gender discrimination in hiring. Each row represents a unique resume submitted to a job posting.
