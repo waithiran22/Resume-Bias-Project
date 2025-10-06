@@ -26,7 +26,7 @@ The dashboard includes:
 - **What Employers Value** → Feature importance rankings once biased features are removed.  
 - **Resume Correlations** → Heatmap of education, honors, gaps, and skills.  
 
-![Dashboard Snapshot](figures/dashboardimage.png)  
+![Dashboard Snapshot](dashboard/dashboardimage.png)  
 
 ---
 ## Dataset Overview
